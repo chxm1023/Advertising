@@ -7,7 +7,7 @@
 
 [rewrite_local]
 
-^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=(hotWords|hotSearchTerms) url script-response-body https://raw.githubusercontent.com/chxm1023/script/main/Advertising/jd_json.js
+^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=(hotWords|hotSearchTerms) url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/jd_json.js
 
 [mitm]
 
