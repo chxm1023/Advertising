@@ -1,14 +1,15 @@
 /****************************************
 
 项目功能：小红书去开屏广告、瀑布流广告、启动广告
+使用声明：仅供学习与交流，请勿转载与贩卖！⚠️⚠️⚠️
 
 *****************************************
 
 [rewrite_local]
 
-^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d\/system_service\/splash_config url script-response-body https://raw.githubusercontent.com/chxm1023/script/main/Advertising/xiaohongshu.js
-^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d\/homefeed\? url script-response-body https://raw.githubusercontent.com/chxm1023/script/main/Advertising/xiaohongshu.js
-^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d\/system_service\/config\? url script-response-body https://raw.githubusercontent.com/chxm1023/script/main/Advertising/xiaohongshu.js
+^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d\/system_service\/splash_config url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/xiaohongshu.js
+^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d\/homefeed\? url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/xiaohongshu.js
+^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d\/system_service\/config\? url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/xiaohongshu.js
 ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d\/search\/hot_list url response-body items":\[.+\] response-body items":[]
 ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d\/search\/trending url response-body queries":\[.+\] response-body queries":[]
 ^https?:\/\/www\.xiaohongshu\.com\/api\/sns\/v\d\/tag\/ads_engage url reject-dict
