@@ -7,7 +7,7 @@ author      kk pp
 
 
 [rewrite_local]
-^https?:\/\/api.coolapk.com\/v6\/(feed\/(replyList|detail)|main\/indexV8|dataList) url script-response-body https://raw.githubusercontent.com/chxm1023/script/main/Advertising/coolapk.js
+^https?:\/\/api.coolapk.com\/v6\/(feed\/(replyList|detail)|main\/indexV8|dataList) url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/coolapk.js
 
 [mitm]
 hostname = api.coolapk.com
