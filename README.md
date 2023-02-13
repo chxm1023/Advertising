@@ -1,6 +1,6 @@
 ### 访问量
 
-![](http://profile-counter.glitch.me/FoKit_Scripts/count.svg)
+![](http://profile-counter.glitch.me/chxm1023_Advertising/count.svg)
 
 ### 使用声明：
 
