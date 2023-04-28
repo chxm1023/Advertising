@@ -9,7 +9,7 @@
 **************************************
 
 [rewrite_local]
-^https?:\/\/www\.i3zh\.com\/wp-json\/watch-life-net\/.+\/(options|posts) url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/xcx/slhh.js
+^https?:\/\/www\.i3zh\.com\/wp-json\/watch-life-net\/.+\/(options|posts) url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/xcx/slhh.js
 
 [mitm]
 hostname = www.i3zh.com
