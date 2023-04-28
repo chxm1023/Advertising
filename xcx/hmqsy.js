@@ -11,8 +11,8 @@
 **************************************
 
 [rewrite_local]
-^https?:\/\/analysis\.20kaka\.cn\/api\/wechat url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/hmqsy.js
-^https?:\/\/q12\.tuanyougou\.com url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/hmqsy.js
+^https?:\/\/analysis\.20kaka\.cn\/api\/wechat url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/xcx/hmqsy.js
+^https?:\/\/q12\.tuanyougou\.com url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/xcx/hmqsy.js
 
 [mitm]
 hostname = q12.tuanyougou.com, analysis.20kaka.cn
