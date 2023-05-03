@@ -20,7 +20,8 @@ var body = $response.body;
 var chxm1023 = JSON.parse(body);
 
 chxm1023.advertisement_num = 0;
-
 chxm1023.advertisement_info = [];
+delete chxm1023.appid;
 
 $done({body : JSON.stringify(chxm1023)});
+ 
