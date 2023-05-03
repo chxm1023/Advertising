@@ -1,0 +1,11 @@
+#!name = 涩涩视频——去除所有广告
+#!desc = Github库地址：
+#!openUrl = https://github.com/chxm1023/Script_X
+#!author = chxm1023
+#!homepage = https://t.me/chxm1023
+
+[Script]
+http-response ^https:\/\/files\.(yuchenglw|honghufly)\.com script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/sssp.js, requires-body=true, tag=涩涩视频—去除所有广告
+
+[MITM]
+hostname = files.*.com
