@@ -59,7 +59,7 @@ http:\/\/image\.cdn\.zxrtb\.com - reject-200
 ^http?:\/\/quanguo\.mygolbs\.com:8081 - reject
 ^https?:\/\/remind\.mygolbs\.com\/remind-off\/query\/.+ - reject
 ^https?:\/\/(cpu-openapi|mobads)\.baidu\.com\/(api\/.+\/data\/list|ads\/.+) - reject
-#淘淘阅读
+# 淘淘阅读
 # hostname = bid.adview.cn
 ^https?:\/\/bid\.adview\.cn\/agent\/getAd - reject
 # 豆瓣开屏广告
