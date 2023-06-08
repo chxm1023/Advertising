@@ -55,7 +55,7 @@ http:\/\/image\.cdn\.zxrtb\.com - reject-200
 # hostname = *.gdt.qq.com
 ^http[s]?:\/\/.*\.gdt\.qq\.com\/gdt_mview.fcg - reject
 # hostname = access.pangolin-sdk-toutiao*.com,
-^http[s]?:\/\/api-access\.pangolin-sdk-toutiao.*\.com url reject
+^http[s]?:\/\/api-access\.pangolin-sdk-toutiao.*\.com - reject
 # hostname = *.pglstatp-toutiao.com
 ^http[s]?:\/\/.*\.pglstatp-toutiao\.com\/.+ - reject
 
@@ -136,4 +136,4 @@ https?:\/\/.*\.enmonster\.com\/apa\/(advert\/demand\/home\/poster|index\/advert\
 
 
 [MITM]
-hostname = %APPEND% api.douban.com, bid.adview.cn, *.baidu.com, *.mygolbs.com,pgdt.gtimg.cn, adsfileretry.service.kugou.com, *.pglstatp-toutiao.com, *.pangolin-*toutiao*.com, *.gdt.qq.com, video-dsp.pddpic.com, *.pinduoduo.com, *.speedtest.cn, image.cdn.zxrtb.com,pipi.4kya.com, pzoap.moedot.net, js-ad.ayximgss.com, sdk.alibaba.com.ailbaba.me, *.meituan.com, api.coolapk.com, vpic.cms.qq.com, vip7.fzwdyy.cn, api.bspapp.com, qadx*.qinlinad.com, mall-dsp*.qinlinkeji.com, analysis.20kaka.cn, q12.tuanyougou.com, www.i3zh.com, *.sharedaka.com, comic.321mh.com, *.enmonster.com, mp.weixin.qq.com, lysl2020.com
+hostname = %APPEND% api.douban.com, bid.adview.cn, *.baidu.com, *.mygolbs.com,pgdt.gtimg.cn, adsfileretry.service.kugou.com, *.pglstatp-toutiao.com, access.pangolin-sdk-toutiao*.com, *.gdt.qq.com, video-dsp.pddpic.com, *.pinduoduo.com, *.speedtest.cn, image.cdn.zxrtb.com,pipi.4kya.com, pzoap.moedot.net, js-ad.ayximgss.com, sdk.alibaba.com.ailbaba.me, *.meituan.com, api.coolapk.com, vpic.cms.qq.com, vip7.fzwdyy.cn, api.bspapp.com, qadx*.qinlinad.com, mall-dsp*.qinlinkeji.com, analysis.20kaka.cn, q12.tuanyougou.com, www.i3zh.com, *.sharedaka.com, comic.321mh.com, *.enmonster.com, mp.weixin.qq.com, lysl2020.com
