@@ -6,9 +6,9 @@
 使用声明：⚠️仅供参考，🈲转载与售卖！
 **************************************
 [rewrite_local]
-^https?:\/\/api\.pxxgg\.xyz\/api url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/JavDB.js
+^https?:\/\/api\.(pxxgg\.xyz|ujvnmkx\.cn)\/api url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/JavDB.js
 [mitm]
-hostname = api.pxxgg.xyz
+hostname = api.pxxgg.xyz, api.ujvnmkx.cn
 *************************************/
 
 
