@@ -1,0 +1,11 @@
+#!name = JavDB-去广告
+#!author = chxm1023
+#!homepage = https://t.me/chxm1023
+#!url=https://raw.githubusercontent.com/chxm1023/Advertising/Shadowrocket/JavDB.sgmodule
+
+
+[Script]
+JavDB去广告 = type=http-response,script-path= https://raw.githubusercontent.com/chxm1023/Rewrite/main/JavDB.js,pattern= ^https?:\/\/api\.((pxxgg|yijingluowangluo)\.xyz|ujvnmkx\.cn)\/api,max-size=0,requires-body=true,timeout=10,script-update-interval=0,enable=true
+
+[MITM]
+hostname = %APPEND% api.pxxgg.xyz, api.ujvnmkx.cn, api.yijingluowangluo.xyz
