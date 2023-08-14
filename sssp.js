@@ -20,28 +20,22 @@ hostname = files.*.com
 
 var body=$response.body;
 
-body = body.replace(/(<div class="speaker" style="display: none;">)[\s\S[\d\D]{0,101}(<\/div>)/g,'<!--  -->');
+//屏蔽首页广告
+body = body.replace(/(<div class="container mt-3">)[\s\S[\d\D]{28,30000}(<div class="banner mt-3">)/g,'<div class="banner mt-3">');
 
-body = body.replace(/(<div id="popup">)[\s\S[\d\D]{0,1539}(<\/div>)/g,'<!--  -->');
+//屏蔽最下方横幅广告
+body = body.replace(/(<div class="float-app">)[\s\S[\d\D]{0,500}(<\/div>)/g,'<!--  -->');
 
-body = body.replace(/(<div class="float-app">)[\s\S[\d\D]{0,345}(<\/div>)/g,'<!--  -->');
+//过滤分类里面的跳转广告
+body = body.replace(/(<a class="" href="https)[\s\S[\d\D]{0,500}(<!--  -->)/g,'<!chxm1023>');
 
-body = body.replace(/(<div id="carousel")[\s\S[\d\D]{0,1777}(<\/div>)/g,'<!--  -->');
+//过滤分类内的插图
+body = body.replace(/(<!chxm1023>)[\s\S[\d\D]{0,10000}(<div class="banner">)/g,'<div class="banner">');
 
-body = body.replace(/(<div class="header fixed-top">)[\s\S[\d\D]{0,345}(<\/div>)/g,'<!--  -->');
+//屏蔽分类，播放，的无用广告
+body = body.replace(/(<div class="iconad">)[\s\S[\d\D]{20,5000}(<p>四季体育<\/p>)/g,'<!--  -->');
 
-body = body.replace(/(<div class="banner mt-3">)[\s\S[\d\D]{0,20000}(<h3 class="mt-3">今日推荐<\/h3>)/g,'<h3 class="mt-3">今日推荐</h3>');
-
-body = body.replace(/(<div class="iconad">)[\s\S[\d\D]{0,20000}(<h3 class="mt-3">今日推荐<\/h3>)/g,'<h3 class="mt-3">今日推荐</h3>');
-
-body = body.replace(/(<div class="iconad">)[\s\S[\d\D]{0,20000}(<div class="row lists">)/g,'<div class="row lists">');
-
-body = body.replace(/(<div class="banner">)[\s\S[\d\D]{0,20000}(<div class="play mt-3">)/g,'<div class="play mt-3">');
-
-body = body.replace(/(<div class="banner">)[\s\S[\d\D]{0,20000}(<div class="row lists">)/g,'<div class="row lists">');
-
+//屏蔽播放页面下方猜你喜欢
 body = body.replace(/(<div class="banner mt-3">)[\s\S[\d\D]{0,20000}(<div class="mt-5 text-center">)/g,'<div class="mt-5 text-center">');
-
-body = body.replace(/(<div class="float-app">)[\s\S[\d\D]{0,20000}(<div class="container">)/g,'<div class="container">');
 
 $done({body});
