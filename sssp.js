@@ -18,24 +18,32 @@ hostname = files.*.com
 *************************************/
 
 
-var body=$response.body;
+var body = $response.body;
 
-//屏蔽首页广告
-body = body.replace(/(<div class="container mt-3">)[\s\S[\d\D]{28,30000}(<div class="banner mt-3">)/g,'<div class="banner mt-3">');
+// 定义替换规则
+var chxm1023 = [
+    { search: /(<div id="popup">)[\s\S[\d\D]{0,1000}(<div class="header">)/g, replace: '$2' },  //首页弹窗
+    { search: /(<div class="container mt-3">)[\s\S[\d\D]{28,30000}(<div class="banner mt-3">)/g, replace: '$2' },  //屏蔽首页广告
+    { search: /(<div class="float-app">)[\s\S[\d\D]{0,500}(<\/div>)/g, replace: '<!--  -->' },  //屏蔽最下方横幅广告
+    { search: /(<a class="" href="https)[\s\S[\d\D]{0,500}(<!--  -->)/g, replace: '<!chxm1023>' },  //过滤分类里面的跳转广告
+    { search: /(<!chxm1023>)[\s\S[\d\D]{0,10000}(<div class="banner">)/g, replace: '$2' },  //过滤分类内的插图
+    { search: /(<div class="iconad">)[\s\S[\d\D]{0,20000}(<div class="play mt-3">)/g, replace: '$2' },  //屏蔽播放页小图标广告
+    { search: /(<div class="iconad">)[\s\S[\d\D]{0,20000}(<h2>原创传媒<\/h2>)/g, replace: '$2' },  //屏蔽分类页小图标广告
+    { search: /(<div class="banner mt-3">)[\s\S[\d\D]{0,20000}(<div class="mt-5 text-center">)/g, replace: '$2' }  //屏蔽播放页面下方猜你
+];
 
-//屏蔽最下方横幅广告
-body = body.replace(/(<div class="float-app">)[\s\S[\d\D]{0,500}(<\/div>)/g,'<!--  -->');
+// 执行替换
+chxm1023.forEach(replacement => {
+    body = body.replace(replacement.search, replacement.replace);
+});
 
-//过滤分类里面的跳转广告
-body = body.replace(/(<a class="" href="https)[\s\S[\d\D]{0,500}(<!--  -->)/g,'<!chxm1023>');
+// 定义敏感词
+var keywords = ["同城约会，上门做爱",  "约会空姐 爆操人妻",  "少女援交 处女上门",  "高端外围在线约爱",  "全国最高端约炮平台",  "真人约炮 视频认证 高端外围",  "免费上门做爱",  "同城美女 点击做爱",  "同城约炮，极品美女在线做爱",  "24小时极速上门做爱",  "外围上门 学生兼职"];
 
-//过滤分类内的插图
-body = body.replace(/(<!chxm1023>)[\s\S[\d\D]{0,10000}(<div class="banner">)/g,'<div class="banner">');
-
-//屏蔽分类，播放，的无用广告
-body = body.replace(/(<div class="iconad">)[\s\S[\d\D]{20,5000}(<p>四季体育<\/p>)/g,'<!--  -->');
-
-//屏蔽播放页面下方猜你喜欢
-body = body.replace(/(<div class="banner mt-3">)[\s\S[\d\D]{0,20000}(<div class="mt-5 text-center">)/g,'<div class="mt-5 text-center">');
+// 对每个敏感词进行处理
+keywords.forEach(keyword => {
+    var reg = new RegExp('(<div class="col-6 item">)[\\s\\S]{0,350}(' + keyword + ')<\/p>[\\s\\S]{0,20}<\/div>', 'g');
+    body = body.replace(reg, '');
+});
 
 $done({body});
