@@ -10,7 +10,7 @@
 **************************************
 
 [rewrite_local]
-^https:\/\/files\..*\.com url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/sssp.js
+^https:\/\/files\.(yuchenglw|honghufly)\.com url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/sssp.js
 
 [mitm]
 hostname = files.*.com
