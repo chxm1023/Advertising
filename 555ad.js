@@ -18,4 +18,24 @@ hostname = a.weilai555.com, vpic.cms.qq.com
 *************************************/
 
 
-var chxm1023 = $response.body.replace(/\"layout":"advert_self"/g, '\"layout":"chxm1023"').replace(/\"recommendList"/g, '\"chxm1023"');$done(chxm1023);
+var chxm1023 = $response.body.replace(/\"layout
+
+var body = $response.body;
+var chxm1023 = JSON.parse(body);
+
+function recursiveRemoval(chxm1023) {
+    for (let key in chxm1023) {
+        if (typeof(chxm1023[key]) === 'object') {
+            if ('layout' in chxm1023[key] && chxm1023[key]['layout'] === 'advert_self') {
+                delete chxm1023[key];
+            } else {
+                recursiveRemoval(chxm1023[key]);
+            }
+        }
+    }
+}
+
+recursiveRemoval(chxm1023);
+
+body = JSON.stringify(chxm1023);
+$done({body});
