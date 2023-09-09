@@ -18,8 +18,6 @@ hostname = a.weilai555.com, vpic.cms.qq.com
 *************************************/
 
 
-var chxm1023 = $response.body.replace(/\"layout
-
 var body = $response.body;
 var chxm1023 = JSON.parse(body);
 
