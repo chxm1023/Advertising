@@ -96,6 +96,10 @@ https?:\/\/.*\.enmonster\.com\/apa\/(advert\/demand\/home\/poster|index\/advert\
 # hostname = api.bspapp.com
 趣听音乐馆-净化 = type=http-response,script-path= https://raw.githubusercontent.com/chxm1023/Advertising/main/quting.js,pattern= ^https?:\/\/api\.bspapp\.com\/client$,max-size=0,requires-body=true,timeout=10,script-update-interval=0,enable=true
 
+# 555影视 去除广告模块
+# hostname = a.weilai555.com, app-v1.ecoliving168.com
+555ad = type=http-response,pattern=^https?:\/\/.*\.(weilai555\.com:1000|ecoliving168\.com)\/api\/v\d\/movie\/(index_recommend.+|detail),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/555ad.js
+
 # 酷安 去好物推荐
 # hostname = api.coolapk.com
 酷安 = type=http-response,script-path= https://raw.githubusercontent.com/chxm1023/Advertising/main/KA.js,pattern= ^https:\/\/api\.coolapk\.com\/v6\/feed\/detail.+,max-size=0,requires-body=true,timeout=10,script-update-interval=0,enable=true
