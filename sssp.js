@@ -22,6 +22,7 @@ var body = $response.body;
 
 // 定义替换规则
 var chxm1023 = [
+    { search: /(<div id="launch">)[\s\S[\d\D]{0,1000}(<\/script>)/g, replace: '$2' },  //开屏广告
     { search: /(<div id="popup">)[\s\S[\d\D]{0,1000}(<div class="header">)/g, replace: '$2' },  //首页弹窗
     { search: /(<div class="container mt-3">)[\s\S[\d\D]{28,30000}(<div class="banner mt-3">)/g, replace: '$2' },  //屏蔽首页广告
     { search: /(<div class="float-app">)[\s\S[\d\D]{0,500}(<\/div>)/g, replace: '<!--  -->' },  //屏蔽最下方横幅广告
