@@ -10,10 +10,10 @@
 **************************************
 
 [rewrite_local]
-https?:\/\/(files\.(yuchenglw|honghufly)\.com|(os\.privacypolicie|ss\.osupdate)\.net) url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/sssp.js
+https?:\/\/(files\.(yuchenglw|honghufly)\.com|(os\.privacypolicie|ss\.osupdate|cdn\.privacypolicie)\.net) url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/sssp.js
 
 [mitm]
-hostname = files.*.com, os.privacypolicie.net, ss.osupdate.net
+hostname = files.*.com, os.privacypolicie.net, ss.osupdate.net, cdn.privacypolicie.net
 
 *************************************/
 
