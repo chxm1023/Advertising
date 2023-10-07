@@ -1,7 +1,7 @@
 /*************************************
 
 项目名称：涩涩视频——去除所有广告
-下载地址：https://48478.xyz/
+下载地址：https://12966.net
 网页在线：https://files.yuchenglw.com
 脚本作者：chxm1023
 电报频道：https://t.me/chxm1023
@@ -10,10 +10,10 @@
 **************************************
 
 [rewrite_local]
-^https:\/\/files\.(yuchenglw|honghufly)\.com url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/sssp.js
+https?:\/\/(files\.(yuchenglw|honghufly)\.com|os\.privacypolicie\.net) url script-response-body https://raw.githubusercontent.com/chxm1023/Advertising/main/sssp.js
 
 [mitm]
-hostname = files.*.com
+hostname = files.*.com, os.privacypolicie.net
 
 *************************************/
 
@@ -39,7 +39,7 @@ chxm1023.forEach(replacement => {
 });
 
 // 定义敏感词
-var keywords = ["同城约会，上门做爱",  "约会空姐 爆操人妻",  "少女援交 处女上门",  "高端外围在线约爱",  "全国最高端约炮平台",  "真人约炮 视频认证 高端外围",  "免费上门做爱",  "同城美女 点击做爱",  "同城约炮，极品美女在线做爱",  "24小时极速上门做爱",  "外围上门 学生兼职"];
+var keywords = ["同城约会，上门做爱",  "约会空姐 爆操人妻",  "少女援交 处女上门",  "高端外围在线约爱",  "全国最高端约炮平台",  "真人约炮 视频认证 高端外围",  "免费上门做爱",  "同城美女 点击做爱",  "同城约炮，极品美女在线做爱",  "24小时极速上门做爱",  "外围上门 学生兼职",  "极品美女  尽在小黄书",  "成人精品视频 免费看",  "成人精品高清大片  立即观看",  "精品AV 在线观看",  "全网最全 日更万部",  "永久免费  无需VIP 色播APP "];
 
 // 对每个敏感词进行处理
 keywords.forEach(keyword => {
