@@ -9,19 +9,19 @@
 *************************************/
 
 
-var chxm1023 = JSON.parse($response.body);
+var ddm = JSON.parse($response.body);
 
 if (/(top_notice|advert)/.test($request.url)) {
-  chxm1023 = {};
+  //清空AD内容修改成空响应
+  ddm = {};
 } else {
-  // 定义对象格式的关键词
+  // 定义AD对象关键词
   const ADKeywords = {
     "layout": "advert_self",
     "acttype": "ad",
     "actcontent": "ad"
   };
-
-  // 定义相关键值
+  // 定义AD相关键值
   const ADlist = {
     "is_auth": 1,
     "try_see": 1,
@@ -57,8 +57,7 @@ if (/(top_notice|advert)/.test($request.url)) {
     "adSwitch": false,
     "jiliAd": ""
   };
-
-  // 递归清理对象
+  //核心内容
   function filterAndModify(obj) {
     if (Array.isArray(obj)) {
       return obj.map(filterAndModify).filter(item => !containsAdKeywords(item));
@@ -76,7 +75,6 @@ if (/(top_notice|advert)/.test($request.url)) {
     }
     return obj;
   }
-
   function containsAdKeywords(item) {
     if (typeof item === 'object' && item !== null) {
       return Object.keys(item).some(key => {
@@ -88,7 +86,7 @@ if (/(top_notice|advert)/.test($request.url)) {
     return false;
   }
 
-  chxm1023 = filterAndModify(chxm1023);
+  ddm = filterAndModify(ddm);
 }
 
-$done({ body: JSON.stringify(chxm1023) });
+$done({ body: JSON.stringify(ddm) });
