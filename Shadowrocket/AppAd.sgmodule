@@ -140,7 +140,10 @@ https?:\/\/.*\.enmonster\.com\/apa\/(advert\/demand\/home\/poster|index\/advert\
 #hostname = lysl2020.com
 小野分享 = type=http-response,script-path= https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js,pattern= ^https:\/\/lysl2020.com/wp-json/wp/v2/posts,max-size=0,requires-body=true,timeout=10,script-update-interval=0,enable=true
 
+# Combat Master战后广告去除
+#hostname = eafe8.playfabapi.com
+CombatMaster = type=http-response,script-path= https://raw.githubusercontent.com/chxm1023/Advertising/main/combatad.js,pattern= ^https:\/\/eafe8\.playfabapi\.com\/Client\/GetTitleData,max-size=0,requires-body=true,timeout=10,script-update-interval=0,enable=true
 
 
 [MITM]
-hostname = %APPEND% us.l.qq.com, mime.baidu.com, api.douban.com, bid.adview.cn, cpu-openapi.baidu.com, mobads.baidu.com, *.mygolbs.com, adsfileretry.service.kugou.com, gateway.kugou.com, us.l.qq.com, pgdt.gtimg.cn, adsmind.gdtimg.com, *.pglstatp-toutiao.com, access.pangolin-sdk-toutiao*.com, *.gdt.qq.com, video-dsp.pddpic.com, *.pinduoduo.com, *.speedtest.cn, image.cdn.zxrtb.com,pipi.4kya.com, pzoap.moedot.net, js-ad.ayximgss.com, sdk.alibaba.com.ailbaba.me, api.coolapk.com, a.weilai555.com, app-v1.ecoliving168.com, vpic.cms.qq.com, vip7.fzwdyy.cn, api.bspapp.com, api.next.bspapp.com, ms.jr.jd.com, api.*.jd.com, qadx*.qinlinad.com, mall-dsp*.qinlinkeji.com, analysis.20kaka.cn, q12.tuanyougou.com, www.i3zh.com, *.sharedaka.com, comic.321mh.com, *.enmonster.com, mp.weixin.qq.com, lysl2020.com
+hostname = %APPEND% us.l.qq.com, mime.baidu.com, api.douban.com, bid.adview.cn, cpu-openapi.baidu.com, mobads.baidu.com, *.mygolbs.com, adsfileretry.service.kugou.com, gateway.kugou.com, us.l.qq.com, pgdt.gtimg.cn, adsmind.gdtimg.com, *.pglstatp-toutiao.com, access.pangolin-sdk-toutiao*.com, *.gdt.qq.com, video-dsp.pddpic.com, *.pinduoduo.com, *.speedtest.cn, image.cdn.zxrtb.com,pipi.4kya.com, pzoap.moedot.net, js-ad.ayximgss.com, sdk.alibaba.com.ailbaba.me, api.coolapk.com, a.weilai555.com, app-v1.ecoliving168.com, vpic.cms.qq.com, vip7.fzwdyy.cn, api.bspapp.com, api.next.bspapp.com, ms.jr.jd.com, api.*.jd.com, qadx*.qinlinad.com, mall-dsp*.qinlinkeji.com, analysis.20kaka.cn, q12.tuanyougou.com, www.i3zh.com, *.sharedaka.com, comic.321mh.com, *.enmonster.com, mp.weixin.qq.com, lysl2020.com, eafe8.playfabapi.com
