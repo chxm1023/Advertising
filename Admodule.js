@@ -22,7 +22,6 @@ if (fullClearRules.test($request.url)) {
 
 /******** 精确匹配/数组匹配 ********/
 const keywords = {
-
   // ——— 单值匹配 ———
   "sub_title": "",
 
@@ -46,12 +45,10 @@ const keywords = {
   ]
 };
 
-
 /*********** 正则匹配值 ***********/
 // ⚠ 仅当需要时添加规则，避免误杀
 
 const regexRules = {
-
   // 示例：匹配包含 ad / advert / 广告标识的字段值
   "type": /ad|advert|推广|广告/i,
 
@@ -61,7 +58,6 @@ const regexRules = {
   // 示例：匹配含 splash / 开屏
   "slot": /(splash|开屏)/i
 };
-
 
 /****** 字段值改写（禁用广告） ******/
 const kvlist = {
@@ -107,7 +103,6 @@ const kvlist = {
   "jiliAd": ""
 };
 
-
 /******** 保留字段/清空内容 ********/
 const fieldsToClear = [
   "quad",
@@ -119,18 +114,13 @@ const fieldsToClear = [
 // 判断是否命中 keywords（字符串 + 数组）
 function matchKeywordRule(item) {
   if (typeof item !== "object" || item === null) return false;
-
   return Object.keys(item).some(key => {
-
     if (!(key in keywords)) return false;
-
     const rule = keywords[key];
-
     // 多值数组
     if (Array.isArray(rule)) {
       return rule.includes(item[key]);
     }
-
     // 单值匹配
     return item[key] === rule;
   });
@@ -140,63 +130,48 @@ function matchKeywordRule(item) {
 // 判断是否命中正则规则
 function matchRegexRule(item) {
   if (typeof item !== "object" || item === null) return false;
-
   return Object.keys(item).some(key => {
-
     if (!(key in regexRules)) return false;
-
     const reg = regexRules[key];
-
     // 只对 字符串 / 数字 进行正则匹配
     if (typeof item[key] === "string" || typeof item[key] === "number") {
       return reg.test(String(item[key]));
     }
-
     return false;
   });
 }
 
 /*********** 主过滤逻辑 ***********/
 function filterAndModify(obj) {
-
   if (Array.isArray(obj)) {
-
     return obj
       .map(filterAndModify)
       .filter(item => !(matchKeywordRule(item) || matchRegexRule(item)));
-
   } else if (typeof obj === "object" && obj !== null) {
-
     for (const key in obj) {
-
       // 清空字段内容
       if (fieldsToClear.includes(key)) {
         obj[key] = {};
         continue;
       }
-
       // 命中 精确匹配 / 正则匹配 → 删除对象
       if (matchKeywordRule(obj[key]) || matchRegexRule(obj[key])) {
         delete obj[key];
         continue;
       }
-
       // 递归处理
       if (typeof obj[key] === "object" && obj[key] !== null) {
         obj[key] = filterAndModify(obj[key]);
         continue;
       }
-
       // 命中强制改值字段
       if (key in kvlist) {
         obj[key] = kvlist[key];
       }
     }
   }
-
   return obj;
 }
-
 
 ddm = filterAndModify(ddm);
 
