@@ -17,7 +17,7 @@
 ^https?:\/\/(apif|ellq)\.(ttassfgz|glasneh)\.com\/api\/index\/ad - reject
 ^https?:\/\/.*\.gpxmf\.cn\/api\/v\d\/advert\/config - reject
 # 瓜子影视横幅广告 hostname = api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.gq89em.com, api.qxutcee.com, gzapi.5wftrhuw.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com
-^https?:\/\/(api|gzapi)\..+\.com\/App\/Ad\/(barsIndexAdInfo|splashInfo|vajraInfo|config|activityInfo|skitAdInfo) - reject-dict
+^https?:\/\/(api|gzapi)\..+\.com\/App\/[Aa]d\/(barsIndexAdInfo|splashInfo|vajraInfo|config|activityInfo|skitAdInfo) url reject-dict
 # 处理弹窗/版本弹窗
 ^https?:\/\/.*\/(?:xyz|myk|mtq|peiqi|pqys|aifan|xnm|tegou|xgapp|llq|dsx|xsz)\.php\/.*\/(top_notice|version) - reject-200
 # 小龙/小毛影视 hostname = api.juliangcili.com
