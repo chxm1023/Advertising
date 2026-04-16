@@ -16,12 +16,14 @@
 # 一起刷影视 hostname = apif.ttassfgz.com, ellq.glasneh.com
 ^https?:\/\/(apif|ellq)\.(ttassfgz|glasneh)\.com\/api\/index\/ad - reject
 ^https?:\/\/.*\.gpxmf\.cn\/api\/v\d\/advert\/config - reject
-# 瓜子影视横幅广告 hostname = api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.gq89em.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, gzapi.*.com , jk.*.com
+# 瓜子影视横幅广告 hostname = api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, api.4hnovel.com, gzapi.*.com , jk.*.com
 ^https?:\/\/(api|gzapi|jk)\..+\.com\/App\/([Aa]d\/(barsIndexAdInfo|splashInfo|vajraInfo|config|activityInfo|skitAdInfo)|IndexList\/homeFloatAd|Resource\/CommentAd|IndexPlay\/vodAdvertisement) - reject-dict
+# 禁用电影天堂开屏广告显示，但无法跳过等待
+^https?:\/\/pics\.xhsdns\.cn\/(upload\/(adv|topic)|api\/task\/taskList) - reject-200
 # 处理弹窗/版本弹窗
 ^https?:\/\/.*\/(?:xyz|myk|mtq|peiqi|pqys|aifan|xnm|tegou|xgapp|llq|dsx|xsz)\.php\/.*\/(top_notice|version) - reject-200
 # 小龙/小毛影视 hostname = api.juliangcili.com
-^https:\/\/api\.juliangcili\.com\/\/api\/adver\/space\/waterFall\/list - reject-dict
+^https:\/\/api\.juliangcili\.com\/api\/adver\/space\/waterFall\/list - reject-dict
 http:\/\/sv\.adintl\.cn - reject
 # 鸭奈飞 去开屏广告 hostname = pipi.4kya.com
 ^https?:\/\/pipi\.4kya\.com\/xgapp\.php\/v\d\/advert\.position\.(?!2) - reject
@@ -29,6 +31,8 @@ http:\/\/sv\.adintl\.cn - reject
 ^https?:\/\/image\.cdn\.zxrtb\.com - reject-200
 # 网速管家 去开屏广告 hostname = *.speedtest.cn
 ^https:\/\/.*\.speedtest\.cn\/(images|api\/.+\/showpic\/position) - reject-200
+# TradPlus广告聚合 hostname = api.tradplusad.com
+^https?:\/\/.*\.tradplusad\.com - reject
 # 拼多多相关广告和营销路径 hostname = adim.pinduoduo.com, images.pinduoduo.com, t-dsp.pinduoduo.com
 ^https:\/\/(?:adim|images|t-dsp)\.pinduoduo\.com\/(?:.*\/toutiao|mrk\/.*|marketing_api|dspcb\/i\/mrk_union) - reject-dict
 # 拼多多视频广告路径 hostname = video-dsp.pddpic.com
@@ -49,7 +53,7 @@ http:\/\/sv\.adintl\.cn - reject
 # 行为监控 / trace
 ^https?:\/\/.*\.snssdk\.com\/(bds|monitor|trace|log).* - reject
 # 广告曝光 / 点击 / 追踪
-^https?:\/\/.*\/commercial\/track.* - reject
+^https?:\/\/.*\/commercial\/track - reject
 # 字节跳动系广告bytescm hostname = *.bytescm.com, *.bytegoofy.com
 ^https?:\/\/.*\.bytescm\.com\/obj\/static\/ad - reject
 ^https?:\/\/.*\.bytegoofy\.com\/goofy\/fe\/ies\/bridge.* - reject
@@ -62,13 +66,13 @@ http:\/\/sv\.adintl\.cn - reject
 ^https?:\/\/ad\.qq\.com - reject
 ^https?:\/\/qzs\.gdtimg\.com\/union - reject
 ^https?:\/\/snowflake\.qq\.com\/ola - reject
+# 广告营销服务 hostname = *.cpatrk.net
+^https?:\/\/.*\.cpatrk\.net - reject
 # 拦截 Twitter 的广告内容 hostname = ads.twitter.com
 ^https?:\/\/ads\.twitter\.com - reject
-# 拦截 Google 的广告服务 (DoubleClick 是 Google旗下的广告平台) hostname = googleads.g.doubleclick.net
-^https?:\/\/googleads\.g\.doubleclick\.net - reject
-# 拦截 Google AdSense 服务，该服务用于提供 Google 的网页广告 hostname = pagead2.googlesyndication.com
+# 拦截 Google 的广告服务 hostname = *.g.doubleclick-cn.net, *.g.doubleclick.net, securepubads.g.doubleclick.net, pagead2.googlesyndication.com, adservice.google.com
+^https?:\/\/.*\.g\.doubleclick(?:-cn)?\.net\/gampad\/ads - reject-dict
 ^https?:\/\/pagead2\.googlesyndication\.com - reject
-# 拦截 Google 的广告服务接口 hostname = adservice.google.com
 ^https?:\/\/adservice\.google\.com - reject
 # 拦截 AppNexus 广告，AppNexus 是一家实时广告技术公司 hostname = ib.adnxs.com
 ^https?:\/\/ib\.adnxs\.com - reject
@@ -88,8 +92,8 @@ http:\/\/sv\.adintl\.cn - reject
 ^https?:\/\/adx-os\.bridgeoos\.com - reject
 # shenshiads hostname = adv-api.shenshiads.com
 ^https?:\/\/adv-api\.shenshiads\.com\/adv - reject-dict
-# hostname = adx-strategy-api-cn.statisticslinks.com
-^https?:\/\/adx-strategy-api-cn\.statisticslinks\.com\/sdk\/app_strategy - reject-200
+# ADX广告策略 hostname = adx-strategy-api-*.statisticslinks.com
+^https?:\/\/adx-strategy-api-[^/]+\.statisticslinks\.com - reject
 # 网易邮箱 hostname = appconf.mail.163.com, dashi.163.com
 ^https?:\/\/appconf\.mail\.163\.com\/(mailmaster\/(api\/http\/urlConfig|getRegConfig)\.do|mailoperating\/mailmaster\/api\/operator\/get) - reject-dict
 ^https?:\/\/dashi\.163\.com\/task-center-api\/fapi\/task\/list$ - reject-dict
@@ -120,13 +124,16 @@ http:\/\/sv\.adintl\.cn - reject
 ^https:\/\/mp\.weixin\.qq\.com\/mp\/relatedsearchword - reject-dict
 
 [Script]
+# 京喜/京喜特价/京东小家 去除开屏广告 hostname = api.*.jd.com
+http-response ^https?:\/\/api\..*\.jd\.com\/(client\.action\?functionId=lite_advertising|.+\/service\/getLoadingLinks) script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/jhad.js, requires-body=true, timeout=60, tag=jhad
+
 # 电影猎手 hostname = *.gpxmf.cn
 http-response ^https?:\/\/.*\.gpxmf\.cn\/api\/v\d\/(movie|post) script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js, requires-body=true, timeout=60, tag=Admodule
 
 # 处理广告配置
 http-response ^https?:\/\/.*\/(?:xyz|myk|mtq|peiqi|pqys|aifan|xnm|tegou|xgapp|llq|dsx|xsz)\.php\/.*\/(top_notice|version|app_config) script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js, requires-body=true, timeout=60, tag=Admodule
 
-# 橘汁影视
+# 橘汁/华谊影视
 http-response ^https?:\/\/.*\/api\/v\d\/config\/getConfigList script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js, requires-body=true, timeout=60, tag=Admodule
 
 # 段咖影视-去除所有 hostname = www.duankamv.site
@@ -162,8 +169,8 @@ http-response ^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad script-path=https
 # 小野分享 hostname = lysl2020.com
 http-response ^https?:\/\/lysl2020.com/wp-json/wp/v2/posts script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js, requires-body=true, timeout=60, tag=Admodule
 
-# 小程序解锁查看数据 hostname = *.hseon.cn, *.hhios.cn, *.ppkok.com, , *.jiejing.store, *.trollstore.*, iostj.mrlin.vip, xcx.xuxuyuan.top
+# 小程序解锁查看数据 hostname = *.hseon.cn, *.hhios.cn, *.ppkok.com, ios.jiejing.store, ipa.trollstore.*, iostj.mrlin.vip, xcx.xuxuyuan.top
 http-response ^https?:\/\/.*\.(hseon|hhios|ppkok|jiejing|trollstore|mrlin|xuxuyuan)\.(cn|com|store|xin|vip|top)\/api script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js, requires-body=true, timeout=60, tag=Admodule
 
 [MITM]
-hostname = *.m.taobao.com, ms.jr.jd.com, api.*.jd.com, *.cibnabg.com, apif.ttassfgz.com, ellq.glasneh.com, *.gpxmf.cn, api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.gq89em.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, gzapi.*.com , jk.*.com, llqtv.com, www.duankamv.site, apple.tongchengfabu.com, api.juliangcili.com, api.coolapk.com, pipi.4kya.com, image.cdn.zxrtb.com, *.speedtest.cn, adim.pinduoduo.com, images.pinduoduo.com, t-dsp.pinduoduo.com, video-dsp.pddpic.com, *.pangolin-sdk-toutiao.com, *.pangolin-sdk-toutiao-*.com, *.pglstatp-toutiao.com, *.ctobsnssdk.com, *.snssdk.com, *.gromore.com, *.bytescm.com, *.bytegoofy.com, *.gdt.qq.com, adsmind.gdtimg.com, pgdt.gtimg.cn, vpic.cms.qq.com, us.l.qq.com, sdk.e.qq.com, ad.qq.com, qzs.gdtimg.com, snowflake.qq.com, *.cpatrk.net, ads.twitter.com, googleads.g.doubleclick.net, pagead2.googlesyndication.com, adservice.google.com, ib.adnxs.com, as.yahoo.com, ssl.googlesyndication.com, open.e.kuaishou.com, analytics.oceanengine.com, adx-bj.anythinktech.com, adx-os.bridgeoos.com, adv-api.shenshiads.com, adx-strategy-api-cn.statisticslinks.com, adservice.sigmob.cn, appconf.mail.163.com, dashi.163.com, adsfileretry.service.kugou.com, gateway.kugou.com, *.mygolbs.com, cpu-openapi.baidu.com, mobads.baidu.com, bid.adview.cn, api.douban.com, mime.baidu.com, bgg.baidu.com, app-statistics.edifier.com, admin-app.edifier.com, qadx*.qinlinad.com, mall-dsp*.qinlinkeji.com, analysis.20kaka.cn, q12.tuanyougou.com, www.i3zh.com, *.sharedaka.com, comic.321mh.com, *.enmonster.com, mp.weixin.qq.com, lysl2020.com, *.hseon.cn, *.hhios.cn, *.ppkok.com, , *.jiejing.store, *.trollstore.*, iostj.mrlin.vip, xcx.xuxuyuan.top
+hostname = *.m.taobao.com, ms.jr.jd.com, api.*.jd.com, *.cibnabg.com, apif.ttassfgz.com, ellq.glasneh.com, *.gpxmf.cn, api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, api.4hnovel.com, gzapi.*.com, jk.*.com, pics.xhsdns.cn, llqtv.com, www.duankamv.site, apple.tongchengfabu.com, api.juliangcili.com, api.coolapk.com, pipi.4kya.com, image.cdn.zxrtb.com, *.speedtest.cn, *.tradplusad.com, adim.pinduoduo.com, images.pinduoduo.com, t-dsp.pinduoduo.com, video-dsp.pddpic.com, *.pangolin-sdk-toutiao.com, *.pangolin-sdk-toutiao-*.com, *.pglstatp-toutiao.com, *.ctobsnssdk.com, *.snssdk.com, *.gromore.com, *.bytescm.com, *.bytegoofy.com, *.gdt.qq.com, adsmind.gdtimg.com, pgdt.gtimg.cn, vpic.cms.qq.com, us.l.qq.com, sdk.e.qq.com, ad.qq.com, qzs.gdtimg.com, snowflake.qq.com, *.cpatrk.net, ads.twitter.com, *.g.doubleclick-cn.net, *.g.doubleclick.net, securepubads.g.doubleclick.net, pagead2.googlesyndication.com, adservice.google.com, ib.adnxs.com, as.yahoo.com, ssl.googlesyndication.com, open.e.kuaishou.com, analytics.oceanengine.com, adx-bj.anythinktech.com, adx-os.bridgeoos.com, adv-api.shenshiads.com, adx-strategy-api-*.statisticslinks.com, adservice.sigmob.cn, appconf.mail.163.com, dashi.163.com, adsfileretry.service.kugou.com, gateway.kugou.com, *.mygolbs.com, cpu-openapi.baidu.com, mobads.baidu.com, bid.adview.cn, api.douban.com, mime.baidu.com, bgg.baidu.com, app-statistics.edifier.com, admin-app.edifier.com, qadx*.qinlinad.com, mall-dsp*.qinlinkeji.com, analysis.20kaka.cn, q12.tuanyougou.com, www.i3zh.com, *.sharedaka.com, comic.321mh.com, *.enmonster.com, mp.weixin.qq.com, lysl2020.com, *.hseon.cn, *.hhios.cn, *.ppkok.com, *.jiejing.store, *.trollstore.*, iostj.mrlin.vip, xcx.xuxuyuan.top
