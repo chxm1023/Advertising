@@ -15,7 +15,7 @@
 # 一起刷影视 hostname = apif.ttassfgz.com, ellq.glasneh.com
 ^https?:\/\/(apif|ellq)\.(ttassfgz|glasneh)\.com\/api\/index\/ad - reject
 ^https?:\/\/.*\.gpxmf\.cn\/api\/v\d\/advert\/config - reject
-# 瓜子影视横幅广告 hostname = api.ainitpz.com, api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, api.4hnovel.com, gzapi.*.com , jk.*.com
+# 瓜子影视横幅广告 hostname = api.1000gxf.com, api.ainitpz.com, api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, api.4hnovel.com, gzapi.*.com , jk.*.com
 ^https?:\/\/(api|gzapi|jk)\..+\.com\/App\/([Aa]d\/(barsIndexAdInfo|splashInfo|vajraInfo|config|activityInfo|skitAdInfo)|IndexList\/homeFloatAd|Resource\/CommentAd|IndexPlay\/vodAdvertisement) - reject-dict
 # 禁用电影天堂开屏广告显示，但无法跳过等待
 ^https?:\/\/pics\.xhsdns\.cn\/(upload\/(adv|topic)|api\/task\/taskList) - reject-200
