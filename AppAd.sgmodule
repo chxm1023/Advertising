@@ -17,7 +17,7 @@
 ^https?:\/\/.*\.gpxmf\.cn\/api\/v\d\/advert\/config - reject
 # 瓜子影视横幅广告 hostname = api.1000gxf.com, api.ainitpz.com, api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, api.4hnovel.com, gzapi.*.com , jk.*.com
 ^https?:\/\/(api|gzapi|jk)\..+\.com\/App\/([Aa]d\/(barsIndexAdInfo|splashInfo|vajraInfo|config|activityInfo|skitAdInfo)|IndexList\/homeFloatAd|Resource\/CommentAd|IndexPlay\/vodAdvertisement) - reject-dict
-# 禁用电影天堂开屏广告显示，但无法跳过等待
+# 禁用电影天堂开屏广告显示，但无法跳过等待 hostname = pics.xhsdns.cn
 ^https?:\/\/pics\.xhsdns\.cn\/(upload\/(adv|topic)|api\/task\/taskList) - reject-200
 # 处理弹窗/版本弹窗
 ^https?:\/\/.*\/(?:xyz|myk|mtq|peiqi|pqys|aifan|xnm|tegou|xgapp|llq|dsx|xsz)\.php\/.*\/(top_notice|version) - reject-200
@@ -85,8 +85,8 @@ http:\/\/sv\.adintl\.cn - reject
 ^https?:\/\/analytics\.oceanengine\.com\/sdk\/app - reject-dict
 # AnyThink 广告竞价接口 hostname = adx-bj.anythinktech.com
 ^https?:\/\/adx-bj\.anythinktech\.com\/bid - reject-dict
-# Sigmob（思谋广告） hostname = adservice.sigmob.cn
-^https?:\/\/adservice\.sigmob\.cn - reject
+# Sigmob（思谋广告） hostname = *.sigmob.cn
+^https?:\/\/.*\.sigmob\.cn - reject
 # BridgeOOS 广告竞价接口 hostname = adx-os.bridgeoos.com
 ^https?:\/\/adx-os\.bridgeoos\.com - reject
 # shenshiads hostname = adv-api.shenshiads.com
@@ -125,6 +125,9 @@ http:\/\/sv\.adintl\.cn - reject
 [Script]
 # 京喜/京喜特价/京东小家 去除开屏广告 hostname = api.*.jd.com
 jhad = type=http-response, pattern=^https?:\/\/api\..*\.jd\.com\/(client\.action\?functionId=lite_advertising|.+\/service\/getLoadingLinks), script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/jhad.js, requires-body=true, max-size=-1, timeout=60
+
+# 大师兄影视
+Admodule = type=http-response, pattern=http:\/\/app\.dsx\.ac\/ndsx\.php\/v\d\/logs, script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js, requires-body=true, max-size=-1, timeout=60
 
 # 电影猎手 hostname = *.gpxmf.cn
 Admodule = type=http-response, pattern=^https?:\/\/.*\.gpxmf\.cn\/api\/v\d\/(movie|post), script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js, requires-body=true, max-size=-1, timeout=60
@@ -172,4 +175,4 @@ Admodule = type=http-response, pattern=^https?:\/\/lysl2020.com/wp-json/wp/v2/po
 Admodule = type=http-response, pattern=^https?:\/\/.*\.(hseon|hhios|ppkok|jiejing|trollstore|mrlin|xuxuyuan)\.(cn|com|store|xin|vip|top)\/api, script-path=https://raw.githubusercontent.com/chxm1023/Advertising/main/Admodule.js, requires-body=true, max-size=-1, timeout=60
 
 [MITM]
-hostname = %APPEND% *.m.taobao.com, ms.jr.jd.com, api.*.jd.com, *.cibnabg.com, apif.ttassfgz.com, ellq.glasneh.com, *.gpxmf.cn, api.1000gxf.com, api.ainitpz.com, api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, api.4hnovel.com, gzapi.*.com, jk.*.com, pics.xhsdns.cn, llqtv.com, www.duankamv.site, apple.tongchengfabu.com, api.juliangcili.com, api.coolapk.com, pipi.4kya.com, image.cdn.zxrtb.com, *.speedtest.cn, *.tradplusad.com, adim.pinduoduo.com, images.pinduoduo.com, t-dsp.pinduoduo.com, video-dsp.pddpic.com, *.pangolin-sdk-toutiao.com, *.pangolin-sdk-toutiao-*.com, *.pglstatp-toutiao.com, *.ctobsnssdk.com, *.snssdk.com, *.gromore.com, *.bytescm.com, *.bytegoofy.com, *.gdt.qq.com, adsmind.gdtimg.com, pgdt.gtimg.cn, vpic.cms.qq.com, us.l.qq.com, sdk.e.qq.com, ad.qq.com, qzs.gdtimg.com, snowflake.qq.com, *.cpatrk.net, ads.twitter.com, *.g.doubleclick-cn.net, *.g.doubleclick.net, securepubads.g.doubleclick.net, pagead2.googlesyndication.com, adservice.google.com, ib.adnxs.com, as.yahoo.com, ssl.googlesyndication.com, open.e.kuaishou.com, analytics.oceanengine.com, adx-bj.anythinktech.com, adx-os.bridgeoos.com, adv-api.shenshiads.com, adx-strategy-api-*.statisticslinks.com, adservice.sigmob.cn, appconf.mail.163.com, dashi.163.com, adsfileretry.service.kugou.com, gateway.kugou.com, *.mygolbs.com, cpu-openapi.baidu.com, mobads.baidu.com, bid.adview.cn, api.douban.com, mime.baidu.com, bgg.baidu.com, app-statistics.edifier.com, admin-app.edifier.com, qadx*.qinlinad.com, mall-dsp*.qinlinkeji.com, analysis.20kaka.cn, q12.tuanyougou.com, www.i3zh.com, *.sharedaka.com, comic.321mh.com, *.enmonster.com, mp.weixin.qq.com, lysl2020.com, *.hseon.cn, *.hhios.cn, *.ppkok.com, *.jiejing.store, *.trollstore.*, iostj.mrlin.vip, xcx.xuxuyuan.top
+hostname = %APPEND% *.m.taobao.com, ms.jr.jd.com, api.*.jd.com, *.cibnabg.com, apif.ttassfgz.com, ellq.glasneh.com, *.gpxmf.cn, api.1000gxf.com, api.ainitpz.com, api.5fcgcnn.com, api.hpdgjnf.com, api.wyw68fg.com, api.hpfcqfh.com, api.dzjxekd.com, api.qxutcee.com, api.fkkejucm.com, api.sh75d6qk.com, api.gq89em.com, api.chgjaq4.com, api.cbvbqtz.com, api.gdj2a3qy.com, api.7gmsut2m.com, api.4hnovel.com, gzapi.*.com, jk.*.com, pics.xhsdns.cn, llqtv.com, www.duankamv.site, apple.tongchengfabu.com, api.juliangcili.com, api.coolapk.com, pipi.4kya.com, image.cdn.zxrtb.com, *.speedtest.cn, *.tradplusad.com, adim.pinduoduo.com, images.pinduoduo.com, t-dsp.pinduoduo.com, video-dsp.pddpic.com, *.pangolin-sdk-toutiao.com, *.pangolin-sdk-toutiao-*.com, *.pglstatp-toutiao.com, *.ctobsnssdk.com, *.snssdk.com, *.gromore.com, *.bytescm.com, *.bytegoofy.com, *.gdt.qq.com, adsmind.gdtimg.com, pgdt.gtimg.cn, vpic.cms.qq.com, us.l.qq.com, sdk.e.qq.com, ad.qq.com, qzs.gdtimg.com, snowflake.qq.com, *.cpatrk.net, ads.twitter.com, *.g.doubleclick-cn.net, *.g.doubleclick.net, securepubads.g.doubleclick.net, pagead2.googlesyndication.com, adservice.google.com, ib.adnxs.com, as.yahoo.com, ssl.googlesyndication.com, open.e.kuaishou.com, analytics.oceanengine.com, adx-bj.anythinktech.com, adx-os.bridgeoos.com, adv-api.shenshiads.com, adx-strategy-api-*.statisticslinks.com, *.sigmob.cn, appconf.mail.163.com, dashi.163.com, adsfileretry.service.kugou.com, gateway.kugou.com, *.mygolbs.com, cpu-openapi.baidu.com, mobads.baidu.com, bid.adview.cn, api.douban.com, mime.baidu.com, bgg.baidu.com, app-statistics.edifier.com, admin-app.edifier.com, qadx*.qinlinad.com, mall-dsp*.qinlinkeji.com, analysis.20kaka.cn, q12.tuanyougou.com, www.i3zh.com, *.sharedaka.com, comic.321mh.com, *.enmonster.com, mp.weixin.qq.com, lysl2020.com, *.hseon.cn, *.hhios.cn, *.ppkok.com, *.jiejing.store, *.trollstore.*, iostj.mrlin.vip, xcx.xuxuyuan.top
