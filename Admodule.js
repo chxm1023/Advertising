@@ -1,43 +1,28 @@
-/************************
- 通用 AD 净化框架 + 正则扩展
- 支持：
- ✓ URL 全量清空
- ✓ 字段值匹配删除
- ✓ 多值数组匹配
- ✓ 正则匹配值
- ✓ 字段改值
- ✓ 清空字段内容
-*************************/
-
 var ddm = JSON.parse($response.body);
 
-/******** URL 全量清空规则 ********/
+// ===== URL 全量清空规则 =====
 const fullClearRules = /(top_notice|version)/;
-
 if (fullClearRules.test($request.url)) {
   ddm = {};
   $done({ body: JSON.stringify(ddm) });
   return;
 }
 
-/******** 精确匹配/数组匹配 ********/
+// ===== 精确匹配/多值数组匹配规则 =====
 const keywords = {
-  // ——— 单值匹配 ———
+  // 精确匹配空字符串
   "sub_title": "",
 
-  // ——— 多值数组 ———
+  // 数组匹配
   "keyName": [
     "config.main.dialog",
     "config.ad.setting",
-    "config.ad.popup"
-  ],
-
+    "config.ad.popup" ],
   "type": [
     "ads",
     "ad",
     "advert"
   ],
-
   "layout": [
     "advert_self",
     "banner_ad",
@@ -45,21 +30,14 @@ const keywords = {
   ]
 };
 
-/*********** 正则匹配值 ***********/
-// ⚠ 仅当需要时添加规则，避免误杀
-
+// ===== 正则匹配规则 =====
 const regexRules = {
-  // 示例：匹配包含 ad / advert / 广告标识的字段值
-  "type": /ad|advert|推广|广告/i,
-
-  // 示例：匹配所有带 ad_xxx 的模块名
-  "module": /^ad_/i,
-
-  // 示例：匹配含 splash / 开屏
-  "slot": /(splash|开屏)/i
+  "type": /ad|advert|推广|广告/i, // 匹配广告相关字段值
+  "module": /^ad_/i, // 匹配模块名
+  "slot": /(splash|开屏)/i // 匹配开屏相关
 };
 
-/****** 字段值改写（禁用广告） ******/
+// ===== 字段改值/禁用广告 =====
 const kvlist = {
   "is_auth": 1,
   "try_see": 1,
@@ -84,7 +62,7 @@ const kvlist = {
   "is_top": 0,
   "Ad": "0",
   "ad": false,
-  "ads": null,
+  "ads": [],
   "AdId": "",
   "adid": "",
   "videoAdId": "",
@@ -103,37 +81,44 @@ const kvlist = {
   "jiliAd": ""
 };
 
-/******** 保留字段/清空内容 ********/
+// ===== 清空指定字段 =====
 const fieldsToClear = [
   "quad",
   "upgradenew"
 ];
 
+// ===== 特殊项目处理配置，可扩展 =====
+const specialHandlers = [
+  {
+    name: "置顶公告",
+    match: obj => obj?.msg === "置顶公告" && obj.data,
+    action: obj => null // 返回 null 表示删除该对象
+  },
+  {
+    name: "首页横幅 banners",
+    match: obj => obj?.msg === "首页推荐" && Array.isArray(obj.data?.banners),
+    action: obj => { obj.data.banners = []; return obj; } // 清空横幅数组
+  }
+  // 后续可添加新的特殊项目
+];
 
-/************ 匹配函数 ************/
-// 判断是否命中 keywords（字符串 + 数组）
+// ====== 判断是否命中精确/数组匹配规则 =====
 function matchKeywordRule(item) {
   if (typeof item !== "object" || item === null) return false;
   return Object.keys(item).some(key => {
     if (!(key in keywords)) return false;
     const rule = keywords[key];
-    // 多值数组
-    if (Array.isArray(rule)) {
-      return rule.includes(item[key]);
-    }
-    // 单值匹配
-    return item[key] === rule;
+    if (Array.isArray(rule)) return rule.includes(item[key]); // 数组匹配
+    return item[key] === rule; // 单值匹配
   });
 }
 
-
-// 判断是否命中正则规则
+// ===== 判断是否命中正则规则 =====
 function matchRegexRule(item) {
   if (typeof item !== "object" || item === null) return false;
   return Object.keys(item).some(key => {
     if (!(key in regexRules)) return false;
     const reg = regexRules[key];
-    // 只对 字符串 / 数字 进行正则匹配
     if (typeof item[key] === "string" || typeof item[key] === "number") {
       return reg.test(String(item[key]));
     }
@@ -141,20 +126,33 @@ function matchRegexRule(item) {
   });
 }
 
-/*********** 主过滤逻辑 ***********/
+// ===== 特殊项目处理 =====
+function handleSpecial(obj) {
+  for (const handler of specialHandlers) {
+    if (handler.match(obj)) {
+      return handler.action(obj);
+    }
+  }
+  return obj;
+}
+
+// ===== 主递归处理函数 =====
 function filterAndModify(obj) {
   if (Array.isArray(obj)) {
     return obj
       .map(filterAndModify)
-      .filter(item => !(matchKeywordRule(item) || matchRegexRule(item)));
+      .filter(item => item !== null); // specialHandler返回null的对象删除
   } else if (typeof obj === "object" && obj !== null) {
+    // 先处理特殊项目
+    obj = handleSpecial(obj);
+    if (!obj) return null;
     for (const key in obj) {
-      // 清空字段内容
+      // 清空指定字段
       if (fieldsToClear.includes(key)) {
         obj[key] = {};
         continue;
       }
-      // 命中 精确匹配 / 正则匹配 → 删除对象
+      // 命中精确匹配/正则匹配 → 删除字段
       if (matchKeywordRule(obj[key]) || matchRegexRule(obj[key])) {
         delete obj[key];
         continue;
@@ -164,11 +162,12 @@ function filterAndModify(obj) {
         obj[key] = filterAndModify(obj[key]);
         continue;
       }
-      // 命中强制改值字段
+      // 强制改值字段
       if (key in kvlist) {
         obj[key] = kvlist[key];
       }
     }
+    return obj;
   }
   return obj;
 }
